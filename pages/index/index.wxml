@@ -1,0 +1,99 @@
+<!-- index.wxml -->
+<!-- 头部 -->
+<view class="container-header">
+    <view class="bg-img">
+        <image class="img" mode="{{aspectFit}}" src="{{seller.avatar}}" />
+    </view>
+    <image class="top-img" src="{{seller.avatar}}" />
+    <view class="title">
+        <text class="seller-name">{{seller.name}}></text>
+        <view class="seller-desc">
+            <text class="desc">评价{{seller.score}}</text>
+            <text class="desc">月售{{seller.sellCount}}单</text>
+            <text class="desc">{{seller.description}}约{{seller.deliveryTime}}分钟</text>
+        </view>
+    </view>
+    <view class="supports-wrapper">
+        <swiper class="supports-swiper" circular vertical autoplay>
+            <swiper-item style="height: 40rpx;" class="supports-item" wx:for="{{seller.supports}}" wx:key="unique">
+                <image style="width:28rpx;height:28rpx" mode="{{aspectFit}}" src="../../image/{{supportsClassMap[item.type]}}_4@2x.png" alt="img" />
+                <text class="supports-desc">{{item.description}}</text>
+            </swiper-item>
+        </swiper>
+        <view class="supports-num" wx:if="{{seller.supports.length}}">
+            {{seller.supports.length}}个优惠
+        </view>
+    </view>
+    <view class="bulletin">公告：{{seller.bulletin}}</view>
+</view>
+<!-- 导航栏 -->
+<view class="tab">
+    <view class="tab-item {{currentIndex===1 ? 'active' : '' }}" data-index="{{1}}" bindtap="navActive">
+        点餐
+    </view>
+    <view class="tab-item {{currentIndex===2 ? 'active' : '' }}" data-index="{{2}}" bindtap="navActive">
+        评价
+    </view>
+    <view class="tab-item {{currentIndex===3 ? 'active' : '' }}" data-index="{{3}}" bindtap="navActive">
+        商家
+    </view>
+</view>
+<!-- 点餐 -->
+<view class="container-goods" hidden="{{currentIndex!==1}}">
+    <!-- 左侧商品类型 -->
+    <view class="goods-type-wrapper">
+        <scroll-view class="type" scroll-y>
+            <view bindtap="typeIndexChange" data-id="b{{index}}" data-index="{{index}}" wx:for="{{goods}}" wx:key="index" class="type-item {{typeIndex===index ? 'active' : ''}}">
+                <image wx:if="{{item.type > 0}}" mode="{{aspectFit}}" style="width:28rpx;height:28rpx" src="../../image/{{supportsClassMap[item.type]}}_3@2x.png" alt="img" />
+                {{item.name}}
+            </view>
+        </scroll-view>
+    </view>
+    <!-- 右侧商品详情 -->
+    <view class="foods-wrapper">
+        <scroll-view class="foods" scroll-y scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
+            <view wx:for="{{goods}}" wx:key="index">
+                <view class="foods-list" id="b{{index}}">
+                    <view class="goods-type-name">{{item.name}}</view>
+                    <!-- food标签 -->
+                    <view class="food-container" wx:for="{{item.foods}}" wx:key="index" bindtap="showDetail">
+                        <image class="food-img" src="{{item.icon}}" alt="img" />
+                        <view class="food-item">
+                            <view class="food-name">{{item.name}}</view>
+                            <view class="food-info" wx:if="{{item.info}}">{{item.info}}</view>
+                            <view class="food-desc">
+                                <text>月售{{item.sellCount}}份</text>
+                                <text>好评率{{item.rating}}%</text>
+                            </view>
+                            <view class="food-price">
+                                <text class="price">￥{{item.price}}</text>
+                                <text wx:if="{{item.oldPrice}}" class="old-price">
+                                    ￥{{item.oldPrice}}
+                                </text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <!-- 商品详情组件 -->
+    <FoodDetail wx:if="{{isDetailShow}}" food="{{goods[0].foods[0]}}" bind:close="closeDetail" />
+    <!-- 购物车 -->
+    <view class="container-shop-cart">
+        <view class="icon-box">
+            <view class="icon-wrapper">
+                <view class="icon-shopping_cart"></view>
+            </view>
+        </view>
+        <view class="total">
+            <view class="total-price">未选购商品</view>
+            <view class="deliveryPrice">另需配送费{{seller.deliveryPrice}}元</view>
+        </view>
+        <view class="minPrice">￥{{seller.minPrice}}起送</view>
+    </view>
+</view>
+<!-- 评价 -->
+<view class="container-ratings" wx:if="{{currentIndex===2}}">评价页面</view>
+<!-- 商家 -->
+<view class="container-seller" wx:if="{{currentIndex===3}}">商家页面</view>

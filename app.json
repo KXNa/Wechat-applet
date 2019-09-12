@@ -1,0 +1,13 @@
+{
+   "pages": [
+      "pages/index/index",
+      "pages/logs/logs"
+   ],
+   "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#29b6f6",
+      "navigationBarTitleText": "饿了么",
+      "navigationBarTextStyle": "white"
+   },
+   "sitemapLocation": "sitemap.json"
+}

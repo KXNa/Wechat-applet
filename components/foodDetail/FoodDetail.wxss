@@ -1,0 +1,62 @@
+/* components/foodDetail/FoodDetail.wxss */
+.fooddetail-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+.icon-close {
+    position: absolute;
+    right: 30rpx;
+    top: 20rpx;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    font-size: 32rpx;
+    text-align: center;
+    line-height: 50rpx;
+    background: rgba(7, 17, 27, 0.3);
+    color: #f9f9f9;
+    /* z-index: 5; */
+}
+.foodpic {
+    width: 750rpx;
+    height: 750rpx;
+}
+.desc-box {
+    padding: 20rpx;
+    width: 100%;
+}
+.foodname {
+    font-size: 44rpx;
+    font-weight: 700;
+    color: rgb(7, 17, 27);
+}
+
+  .food-desc {
+    padding: 10rpx 0;
+    font-size: 24rpx;
+    color: rgba(7, 17, 27, 0.8);
+  }
+  .food-desc text {
+    margin-right: 10rpx;
+  }
+  .price {
+    font-size: 26rpx;
+    color: #bf360c;
+    margin-right: 10rpx;
+  }
+  .old-price {
+    text-decoration: line-through;
+    font-size: 22rpx;
+    color: grey;
+  }
+  .food-info {
+    font-size: 24rpx;
+    margin-top: 10rpx;
+    color: rgba(7, 17, 27, 0.8);
+  }

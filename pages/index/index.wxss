@@ -1,0 +1,258 @@
+@import "../../icon/icon.wxss";
+
+/* 头部样式 */
+.container-header {
+  position: relative;
+}
+.bg-img {
+  width: 100%;
+  height: 220rpx;
+  filter: blur(4rpx);
+}
+.img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.top-img {
+  position: absolute;
+  top: 100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 8rpx;
+}
+.title {
+  padding: 30rpx 100rpx;
+}
+.seller-name {
+  display: block;
+  padding: 10rpx 0;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: rgba(7, 17, 27, 0.8);
+}
+.seller-desc {
+  display: block;
+  text-align: center;
+  font-size: 22rpx;
+  color: rgba(7, 17, 27, 0.6);
+}
+.desc {
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.desc:last-child {
+  margin: 0;
+}
+
+.supports-wrapper {
+  display: flex;
+  width: 100%;
+  height: 40rpx;
+  padding: 22rpx 72rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.supports-swiper {
+  flex: 1;
+  font-size: 26rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #bf360c;
+}
+.supports-item {
+  display: flex;
+  width: 100%;
+  height: 40rpx;
+  align-items: center;
+}
+.supports-desc {
+  height: 100%;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.supports-num {
+  font-size: 22rpx;
+  color: rgba(7, 17, 27, 0.6);
+}
+.bulletin {
+  padding: 10rpx 72rpx;
+  font-size: 22rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(7, 17, 27, 0.6);
+}
+
+/* 导航栏 */
+.tab {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 30rpx;
+  border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+  color: rgba(7, 17, 27, 0.8);
+}
+.tab-item {
+  flex: 1;
+  margin: 0 70rpx;
+  padding: 10rpx 20rpx;
+}
+.tab-item.active {
+  font-weight: 700;
+  border-bottom: 4rpx solid #29b6f6;
+}
+
+/* 点餐商品列表 */
+.container-goods {
+  display: flex;
+}
+/* 左侧商品类型 */
+.goods-type-wrapper {
+  flex: 0 0 160rpx;
+  font-size: 24rpx;
+  background: rgb(243, 245, 247);
+  color: rgba(7, 17, 27, 0.8);
+}
+.type-item {
+  padding: 30rpx 16rpx;
+}
+.type-item.active {
+  background: #fff;
+}
+/* 右侧商品详情 */
+
+.foods-wrapper {
+  flex: 1;
+  padding: 16rpx;
+}
+.foods {
+  height: 90vh;
+  padding-bottom: 100rpx;
+}
+.goods-type-name {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: rgba(7, 17, 27, 0.8);
+}
+.food-container {
+  display: flex;
+  padding: 16rpx 0;
+}
+.food-img {
+  flex: 0 0 160rpx;
+  margin-right: 20rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 6rpx;
+}
+.food-item {
+  flex: 1;
+  position: relative;
+}
+.food-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: rgba(7, 17, 27, 0.8);
+}
+.food-info {
+  max-width: 40vw;
+  font-size: 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 10rpx;
+  color: rgba(7, 17, 27, 0.6);
+}
+.food-desc {
+  padding: 10rpx 0;
+  font-size: 20rpx;
+  color: rgba(7, 17, 27, 0.6);
+}
+.food-desc text {
+  margin-right: 10rpx;
+}
+.food-price {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.price {
+  font-size: 26rpx;
+  /* font-weight: 700; */
+  color: #bf360c;
+  margin-right: 10rpx;
+}
+.old-price {
+  text-decoration: line-through;
+  font-size: 22rpx;
+  color: grey;
+}
+
+/* 购物车 */
+.container-shop-cart {
+  position: fixed;
+  display: flex;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 96rpx;
+  background: rgb(80, 76, 84);
+  z-index: 100;
+}
+/* 购物车图标 */
+.icon-box {
+  flex: 4;
+  position: relative;
+}
+.icon-wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  width: 110rpx;
+  height: 110rpx;
+  border: 12rpx solid rgb(68, 68, 68);
+  border-radius: 50%;
+  vertical-align: middle;
+  background: rgb(52, 52, 52);
+}
+.icon-shopping_cart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 52rpx;
+  color: rgb(96, 96, 96);
+}
+/* 购物车中间样式 */
+.total {
+  padding: 20rpx 0;
+  flex: 7;
+  color: #f1f1f1;
+}
+.total-price {
+  font-size: 26rpx;
+}
+.deliveryPrice {
+  font-size: 20rpx;
+}
+/* 购物车支付按钮 */
+.minPrice {
+  flex: 5;
+  text-align: center;
+  line-height: 96rpx;
+  font-size: 32rpx;
+  background: rgb(84, 80, 88);
+  color: #fff;
+}
