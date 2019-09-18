@@ -26,9 +26,9 @@
     <view class="container-ratings-wrapper">
         <!-- 评论分类按钮 -->
         <view class="select-btn-wrapper">
-            <view class="select-btn btn-all">全部</view>
-            <view class="select-btn btn-like">好评</view>
-            <view class="select-btn btn-dislike">差评</view>
+            <view class="select-btn {{selectType==2?'active':''}}" data-index="2" bind:tap="filterRatings">全部 <text class="count">{{ratings.length}}</text></view>
+            <view class="select-btn {{selectType==0?'active':''}}" data-index="0" bind:tap="filterRatings">好评 <text class="count">{{ratings.length}}</text></view>
+            <view class="btn-dislike {{selectType==1?'active':''}}" data-index="1" bind:tap="filterRatings">差评 <text class="count">{{ratings.length}}</text></view>
         </view>
         <!-- 筛选只看有内容 -->
         <view class="valueable-ratings">✔ 只看有内容的评价</view>

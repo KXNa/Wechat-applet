@@ -54,7 +54,8 @@
   padding: 20rpx 0;
   border-bottom: 1rpx solid rgba(7, 17, 27, 0.2);
 }
-.select-btn {
+.select-btn,.btn-dislike {
+  flex: 0 0 120rpx;
   width: 120rpx;
   height: 60rpx;
   margin-right: 16rpx;
@@ -62,17 +63,27 @@
   text-align: center;
   border-radius: 6rpx;
   font-size: 28rpx;
+}
+.select-btn {
   background: #ffccbc;
   color: rgba(7, 17, 27, 0.7);
 }
 .select-btn.active {
   background: #ff6e40;
 }
-.btn-all {
-  background: #ff6e40;
-}
 .btn-dislike {
   background: rgb(205, 205, 205);
+  color: #fff;
+}
+.btn-dislike.active {
+  background: #999;
+}
+.count {
+  font-size: 24rpx;
+  color: rgba(7, 17, 27, 0.6);
+}
+.btn-dislike .count {
+  font-size: 24rpx;
   color: #fff;
 }
 .valueable-ratings {
