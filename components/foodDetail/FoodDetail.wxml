@@ -1,6 +1,6 @@
 <!-- components/foodDetail/FoodDetail.wxml -->
 <view class="fooddetail-wrapper">
-    <view class="icon-close" bindtap="close">X</view>
+    <view class="icon-close" catch:tap="close">X</view>
     <image scaleToFill class="foodpic" src="{{food.image}}" />
     <view class="desc-box">
         <view class="foodname">{{food.name}}</view>

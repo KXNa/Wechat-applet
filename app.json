@@ -5,8 +5,8 @@
    ],
    "window": {
       "backgroundTextStyle": "light",
-      "navigationBarBackgroundColor": "#29b6f6",
-      "navigationBarTitleText": "饿了么",
+      "navigationBarBackgroundColor": "#ff6e40",
+      "navigationBarTitleText": "恰饭吧",
       "navigationBarTextStyle": "white"
    },
    "sitemapLocation": "sitemap.json"

@@ -47,7 +47,7 @@
   }
   .price {
     font-size: 26rpx;
-    color: #bf360c;
+    color: #d84315;
     margin-right: 10rpx;
   }
   .old-price {

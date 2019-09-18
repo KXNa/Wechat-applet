@@ -5,16 +5,18 @@
   position: relative;
 }
 .bg-img {
+  position: relative;
   width: 100%;
   height: 220rpx;
   filter: blur(4rpx);
 }
-.img {
+.bg-img .img {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
+  /* height: 220rpx; */
 }
 .top-img {
   position: absolute;
@@ -64,7 +66,7 @@
   font-size: 26rpx;
   height: 40rpx;
   line-height: 40rpx;
-  color: #bf360c;
+  color: #d84315;
 }
 .supports-item {
   display: flex;
@@ -108,7 +110,7 @@
 }
 .tab-item.active {
   font-weight: 700;
-  border-bottom: 4rpx solid #29b6f6;
+  border-bottom: 4rpx solid #ff6e40;
 }
 
 /* 点餐商品列表 */
@@ -145,6 +147,7 @@
   color: rgba(7, 17, 27, 0.8);
 }
 .food-container {
+  position: relative;
   display: flex;
   padding: 16rpx 0;
 }
@@ -189,7 +192,7 @@
 .price {
   font-size: 26rpx;
   /* font-weight: 700; */
-  color: #bf360c;
+  color: #d84315;
   margin-right: 10rpx;
 }
 .old-price {
@@ -209,6 +212,62 @@
   height: 96rpx;
   background: rgb(80, 76, 84);
   z-index: 100;
+}
+/* 购物车商品列表栏 */
+.shop-cart-good-list {
+  position: fixed;
+  bottom: 96rpx;
+  left: 0;
+  right: 0;
+  background: #fff;
+}
+.good-list-title {
+  display: flex;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid rgb(222, 222, 222);
+  background: rgb(235, 240, 241);
+}
+.good-list-title text {
+  display: inline-block;
+  color: rgb(96, 96, 96);
+}
+.good-list-title .text {
+  flex: 1;
+  font-size: 34rpx;
+}
+.good-list-title .cleanbtn {
+  flex: 0 0 80rpx;
+  font-size: 26rpx;
+}
+/* 商品列表 */
+.good-list-wrapper {
+  position: relative;
+  padding: 0 30rpx;
+  max-height: 320rpx;
+}
+.good-list {
+  position: relative;
+  display: flex;
+  padding: 20rpx 0;
+  text-align: left;
+  vertical-align: bottom;
+  font-size: 32rpx;
+  border-bottom: 1rpx solid rgba(7, 17, 27, 0.2)
+}
+.good-name {
+  flex: 7;
+  color: rgba(7, 17, 27, 0.9);
+}
+.good-price {
+  flex: 2;
+  margin-right: 120rpx;
+  font-weight: 700;
+  color: #d84315;
+}
+.shop-cart-btn {
+  position: absolute;
+  right: 40rpx;
+  bottom: 0;
 }
 /* 购物车图标 */
 .icon-box {

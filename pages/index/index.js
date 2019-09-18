@@ -17,14 +17,23 @@ Page({
     seller: [],
     goods: [],
     ratings: [],
+    //图标名字
     supportsClassMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
+    //导航栏自定义下标值
     currentIndex: 1,
+    //商品分类栏下标值
     typeIndex: 0,
-    lastActive: 0,
     toView: 0,
+    //商品数组高度
     heightArr: [],
-    scrollTop: 0,
-    isDetailShow: false
+    //是否显示商品详情页
+    isDetailShow: false,
+    //被点击的商品
+    food: {},
+    //被选中的商品数组
+    chooseFood: [],
+    //是否隐藏购物车详情列表
+    isGoodListHidden: false
   },
   newData: function () {
     this.setData({
@@ -33,7 +42,7 @@ Page({
       ratings
     })
   },
-  /*  修改点击事件对象  */
+  //切换导航栏
   navActive: function (e) {
     this.setData({
       currentIndex: e.target.dataset.index
@@ -50,17 +59,17 @@ Page({
   getHeightArr: function () {
     var height = 0
     var heightArr = []
-    for (var i = 0; i < this.data.goods.length; i++) {
-      height = height + 26 + this.data.goods[i].foods.length * 96 - 1
+    var good = this.data.goods
+    for (var i = 0; i < good.length; i++) {
+      height = height + 26 + good[i].foods.length * 96 - 1
       heightArr.push(height)
     }
     this.setData({
       heightArr
     })
   },
-  /* 
-   右边商品滚动切换左边商品类型 
-  */
+
+  //右边商品滚动切换左边商品类型 
   scroll: function (e) {
     var scrollTop = e.detail.scrollTop
     var scrollArr = this.data.heightArr
@@ -80,14 +89,76 @@ Page({
       }
     }
   },
-  showDetail: function() {
+  //展示详情页，并传递所点击的商品对象
+  showDetail: function (e) {
     this.setData({
-      isDetailShow: true
+      isDetailShow: true,
+      food: e.currentTarget.dataset.food
     })
   },
-  closeDetail: function() {
+  //关闭详情页
+  closeDetail: function () {
     this.setData({
       isDetailShow: false
+    })
+  },
+  //点击添加按钮
+  add: function (e) {
+    this.upDatedChooseFood(e)
+  },
+  //点击添加时更新所选商品数组
+  upDatedChooseFood: function (e) {
+    //遍历所选商品数组，判断新选中商品是否存在，存在数量+1，不存在添加新商品
+    let chooseFood = this.data.chooseFood
+    if (chooseFood.length > 0) {
+      let bool = true;
+      for (var food of chooseFood) {
+        if (food.name == e.detail.name) {
+          food.count = food.count + 1
+          bool = false
+        }
+      }
+      if (bool) {
+        chooseFood.push({
+          name: e.detail.name,
+          price: e.detail.price,
+          count: 1
+        })
+      }
+    } else {
+      chooseFood.push({
+        name: e.detail.name,
+        price: e.detail.price,
+        count: 1
+      })
+    }
+    this.setData({
+      chooseFood
+    })
+    // console.log("add",this.data.chooseFood)
+  },
+  //点击减少按钮，更新数组
+  reduce: function (e) {
+    let chooseFood = this.data.chooseFood
+    chooseFood.forEach(food => {
+      if (food.name === e.detail.name) {
+        food.count = food.count - 1
+      }
+    });
+    this.setData({
+      chooseFood
+    })
+    this.filterChooseFood()
+    // console.log("reduce", this.data.chooseFood)
+  },
+  //过滤所选商品数组
+  filterChooseFood: function () {
+    let chooseFood = this.data.chooseFood
+    chooseFood = chooseFood.filter(food => {
+      return food.count != 0
+    })
+    this.setData({
+      chooseFood
     })
   },
   /**

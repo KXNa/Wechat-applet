@@ -1,0 +1,26 @@
+.boll-btn-wrapper {
+    position: absolute;
+    bottom: 18rpx;
+    right: 20rpx;
+    display: flex;
+    height: 40rpx;
+    line-height: 36rpx;
+}
+.reduce, .add {
+    flex: 0 0 36rpx;
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 34rpx;
+    font-size: 36rpx;
+    border: 1rpx solid #ff6e40;
+    color: #ff6e40;
+}
+.add {
+    color: #fff;
+    background: #ff6e40;
+}
+.countnum {
+    padding: 0 20rpx;
+}

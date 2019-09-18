@@ -1,0 +1,5 @@
+<view class="boll-btn-wrapper">
+    <view wx:if="{{count>0}}" catch:tap="reduceCount" class="reduce">-</view>
+    <view wx:if="{{count>0}}" class="countnum">{{count}}</view>
+    <view catch:tap="addCount" class="add">+</view>
+</view>

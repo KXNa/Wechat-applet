@@ -52,11 +52,11 @@
     <!-- 右侧商品详情 -->
     <view class="foods-wrapper">
         <scroll-view class="foods" scroll-y scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
-            <view wx:for="{{goods}}" wx:key="index">
+            <view wx:for="{{goods}}" wx:key="index" wx:for-item="i" data-i="i">
                 <view class="foods-list" id="b{{index}}">
-                    <view class="goods-type-name">{{item.name}}</view>
+                    <view class="goods-type-name">{{i.name}}</view>
                     <!-- food标签 -->
-                    <view class="food-container" wx:for="{{item.foods}}" wx:key="index" bindtap="showDetail">
+                    <view class="food-container" wx:for="{{i.foods}}" wx:key="index" bind:tap="showDetail" data-id="{{index}}" data-i="{{i}}" data-food="{{item}}">
                         <image class="food-img" src="{{item.icon}}" alt="img" />
                         <view class="food-item">
                             <view class="food-name">{{item.name}}</view>
@@ -72,15 +72,31 @@
                                 </text>
                             </view>
                         </view>
+                        <ButtonBall bind:add="add" bind:reduce="reduce" food="{{item}}" name="{{item.name}}" chooseFood="{{chooseFood}}" />
                     </view>
                 </view>
             </view>
         </scroll-view>
+        <!-- 商品详情组件 -->
+        <FoodDetail wx:if="{{isDetailShow}}" food="{{food}}" bind:close="closeDetail" />
     </view>
-    <!-- 商品详情组件 -->
-    <FoodDetail wx:if="{{isDetailShow}}" food="{{goods[0].foods[0]}}" bind:close="closeDetail" />
     <!-- 购物车 -->
     <view class="container-shop-cart">
+        <!-- 购物车商品列表栏 -->
+        <view class="shop-cart-good-list" hidden="{{chooseFood.length===0 || isGoodListHidden}}">
+            <view class="good-list-title">
+                <text class="text">已选商品</text>
+                <text class="cleanbtn">清空</text>
+            </view>
+            <scroll-view class="good-list-wrapper" scroll-y >
+                <view class="good-list" wx:for="{{chooseFood}}" wx:key="index">
+                    <view class="good-name">{{item.name}}</view>
+                    <view class="good-price">{{item.price}}</view>
+                    <ButtonBall class="shop-cart-btn" bind:add="add" bind:reduce="reduce" count="{{item.count}}" name="{{item.name}}" food="{{item}}" chooseFood="{{chooseFood}}" />
+                </view>
+            </scroll-view>
+        </view>
+        <!-- 购物车图标 -->
         <view class="icon-box">
             <view class="icon-wrapper">
                 <view class="icon-shopping_cart"></view>
