@@ -1,32 +1,7 @@
 <!-- index.wxml -->
 <!-- 头部 -->
 <header>
-    <view class="container-header">
-        <view class="bg-img">
-            <image class="img" mode="scaleToFill" src="{{seller.avatar}}" />
-        </view>
-        <image class="top-img" mode="aspectFit" src="{{seller.avatar}}" />
-        <view class="title">
-            <text class="seller-name">{{seller.name}}></text>
-            <view class="seller-desc">
-                <text class="desc">评价{{seller.score}}</text>
-                <text class="desc">月售{{seller.sellCount}}单</text>
-                <text class="desc">{{seller.description}}约{{seller.deliveryTime}}分钟</text>
-            </view>
-        </view>
-        <view class="supports-wrapper">
-            <swiper class="supports-swiper" circular vertical autoplay>
-                <swiper-item style="height: 40rpx;" class="supports-item" wx:for="{{seller.supports}}" wx:key="unique">
-                    <image style="width:28rpx;height:28rpx" mode="{{aspectFit}}" src="../../image/{{supportsClassMap[item.type]}}_4@2x.png" alt="img" />
-                    <text class="supports-desc">{{item.description}}</text>
-                </swiper-item>
-            </swiper>
-            <view class="supports-num" wx:if="{{seller.supports.length}}">
-                {{seller.supports.length}}个优惠
-            </view>
-        </view>
-        <view class="bulletin">公告：{{seller.bulletin}}</view>
-    </view>
+    <Header seller="{{seller}}" supportsClassMap="{{supportsClassMap}}" />
 </header>
 <!-- 导航栏 -->
 <nav>
@@ -46,45 +21,51 @@
 <section>
     <view class="container-goods" hidden="{{currentIndex!==1}}">
         <!-- 左侧商品类型 -->
-        <view class="goods-type-wrapper">
-            <scroll-view class="type" scroll-y>
-                <view bindtap="typeIndexChange" data-id="b{{index}}" data-index="{{index}}" wx:for="{{goods}}" wx:key="index" class="type-item {{typeIndex===index ? 'active' : ''}}">
-                    <image wx:if="{{item.type > 0}}" mode="{{aspectFit}}" style="width:28rpx;height:28rpx" src="../../image/{{supportsClassMap[item.type]}}_3@2x.png" alt="img" />
-                    {{item.name}}
-                </view>
-            </scroll-view>
-        </view>
+        <aside class="left-aside">
+            <view class="goods-type-wrapper">
+                <scroll-view class="type" scroll-y>
+                    <view bindtap="typeIndexChange" data-id="b{{index}}" data-index="{{index}}" wx:for="{{goods}}" wx:key="index" class="type-item {{typeIndex===index ? 'active' : ''}}">
+                        <image wx:if="{{item.type > 0}}" mode="{{aspectFit}}" style="width:28rpx;height:28rpx" src="../../image/{{supportsClassMap[item.type]}}_3@2x.png" alt="img" />
+                        {{item.name}}
+                    </view>
+                </scroll-view>
+            </view>
+        </aside>
         <!-- 右侧商品详情 -->
-        <view class="foods-wrapper">
-            <scroll-view class="foods" scroll-y scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
-                <view wx:for="{{goods}}" wx:key="index" wx:for-item="i" data-i="i">
-                    <view class="foods-list" id="b{{index}}">
-                        <view class="goods-type-name">{{i.name}}</view>
-                        <!-- food标签 -->
-                        <view class="food-container" wx:for="{{i.foods}}" wx:key="index" bind:tap="showDetail" data-id="{{index}}" data-i="{{i}}" data-food="{{item}}">
-                            <image class="food-img" src="{{item.icon}}" alt="img" lazy-load mode="aspectFit" />
-                            <view class="food-item">
-                                <view class="food-name">{{item.name}}</view>
-                                <view class="food-info" wx:if="{{item.info}}">{{item.info}}</view>
-                                <view class="food-desc">
-                                    <text>月售{{item.sellCount}}份</text>
-                                    <text>好评率{{item.rating}}%</text>
+        <aside class="right-aside">
+            <view class="foods-wrapper">
+                <scroll-view class="foods" scroll-y scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
+                    <view wx:for="{{goods}}" wx:key="index" wx:for-item="i" data-i="i">
+                        <view class="foods-list" id="b{{index}}">
+                            <view class="goods-type-name">{{i.name}}</view>
+                            <!-- food标签 -->
+                            <view class="food-container" wx:for="{{i.foods}}" wx:key="index" bind:tap="showDetail" data-id="{{index}}" data-i="{{i}}" data-food="{{item}}">
+                                <image class="food-img" src="{{item.icon}}" alt="img" lazy-load mode="aspectFit" />
+                                <view class="food-item">
+                                    <view class="food-name">{{item.name}}</view>
+                                    <view class="food-info" wx:if="{{item.info}}">
+                                        {{item.info}}
+                                    </view>
+                                    <view class="food-desc">
+                                        <text>月售{{item.sellCount}}份</text>
+                                        <text>好评率{{item.rating}}%</text>
+                                    </view>
+                                    <view class="food-price">
+                                        <text class="price">￥{{item.price}}</text>
+                                        <text wx:if="{{item.oldPrice}}" class="old-price">
+                                            ￥{{item.oldPrice}}
+                                        </text>
+                                    </view>
                                 </view>
-                                <view class="food-price">
-                                    <text class="price">￥{{item.price}}</text>
-                                    <text wx:if="{{item.oldPrice}}" class="old-price">
-                                        ￥{{item.oldPrice}}
-                                    </text>
-                                </view>
+                                <ButtonBall bind:add="add" bind:reduce="reduce" food="{{item}}" name="{{item.name}}" chooseFood="{{chooseFood}}" />
                             </view>
-                            <ButtonBall bind:add="add" bind:reduce="reduce" food="{{item}}" name="{{item.name}}" chooseFood="{{chooseFood}}" />
                         </view>
                     </view>
-                </view>
-            </scroll-view>
-            <!-- 商品详情组件 -->
-            <FoodDetail wx:if="{{isDetailShow}}" food="{{food}}" bind:close="closeDetail" />
-        </view>
+                </scroll-view>
+                <!-- 商品详情组件 -->
+                <FoodDetail wx:if="{{isDetailShow}}" food="{{food}}" bind:close="closeDetail" />
+            </view>
+        </aside>
         <!-- 购物车 -->
         <view class="container-shop-cart" bind:tap="showGoodList">
             <!-- 购物车商品列表栏 -->
@@ -125,10 +106,10 @@
     </view>
 </section>
 <!-- 评价 -->
-<section>
-    <view class="container-ratings" wx:if="{{currentIndex===2}}">评价页面</view>
+<section wx:if="{{currentIndex===2}}">
+    <Ratings seller="{{seller}}" ratings="{{ratings}}" />
 </section>
 <!-- 商家 -->
-<section>
-    <view class="container-seller" wx:if="{{currentIndex===3}}">商家页面</view>
+<section wx:if="{{currentIndex===3}}">
+<SellerPage/>
 </section>

@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-      "FoodDetail": "../../components/foodDetail/FoodDetail",
-      "ButtonBall": "../../components/buttonBall/ButtonBall"
+    "FoodDetail": "../../components/foodDetail/FoodDetail",
+    "ButtonBall": "../../components/buttonBall/ButtonBall",
+    "Ratings": "../../components/ratings/Ratings",
+    "Header": "../../components/header/Header",
+    "SellerPage": "../../components/sellerPage/SellerPage"
   }
 }

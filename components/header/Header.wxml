@@ -1,0 +1,27 @@
+<!-- components/header/Header.wxml -->
+<view class="container-header">
+    <view class="bg-img">
+        <image class="img" mode="scaleToFill" src="{{seller.avatar}}" />
+    </view>
+    <image class="top-img" mode="aspectFit" src="{{seller.avatar}}" />
+    <view class="title">
+        <text class="seller-name">{{seller.name}}></text>
+        <view class="seller-desc">
+            <text class="desc">评价{{seller.score}}</text>
+            <text class="desc">月售{{seller.sellCount}}单</text>
+            <text class="desc">{{seller.description}}约{{seller.deliveryTime}}分钟</text>
+        </view>
+    </view>
+    <view class="supports-wrapper">
+        <swiper class="supports-swiper" circular vertical autoplay>
+            <swiper-item style="height: 40rpx;" class="supports-item" wx:for="{{seller.supports}}" wx:key="unique">
+                <image style="width:28rpx;height:28rpx" lazy-load mode="{{aspectFit}}" src="../../image/{{supportsClassMap[item.type]}}_4@2x.png" alt="img" />
+                <text class="supports-desc">{{item.description}}</text>
+            </swiper-item>
+        </swiper>
+        <view class="supports-num" wx:if="{{seller.supports.length}}">
+            {{seller.supports.length}}个优惠
+        </view>
+    </view>
+    <view class="bulletin">公告：{{seller.bulletin}}</view>
+</view>

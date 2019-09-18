@@ -1,0 +1,53 @@
+<!-- components/ratings/Ratings.wxml -->
+<view class="container-ratings">
+    <!-- 总评栏 -->
+    <view class="seller-ratings">
+        <view class="score">{{seller.score}}</view>
+        <view class="star-score">
+            <text class="star-text">商家评分</text>
+            <text>...</text>
+        </view>
+        <view class="score-content">
+            <text class="score-type">味道</text>
+            <text class="score-num">{{seller.score}}</text>
+        </view>
+        <view class="score-content">
+            <text class="score-type">包装</text>
+            <text class="score-num">{{seller.foodScore}}</text>
+        </view>
+        <view class="score-content last">
+            <text class="score-type">配送</text>
+            <text class="score-num">{{seller.serviceScore}}</text>
+        </view>
+    </view>
+    <!-- 分隔栏 -->
+    <view class="white-space"></view>
+    <!-- 评论页面内容块 -->
+    <view class="container-ratings-wrapper">
+        <!-- 评论分类按钮 -->
+        <view class="select-btn-wrapper">
+            <view class="select-btn btn-all">全部</view>
+            <view class="select-btn btn-like">好评</view>
+            <view class="select-btn btn-dislike">差评</view>
+        </view>
+        <!-- 筛选只看有内容 -->
+        <view class="valueable-ratings">✔ 只看有内容的评价</view>
+        <!-- 评论内容 -->
+        <scroll-view scroll-y class="user-ratings-wrapper" wx:for="{{ratings}}" wx:key="index">
+            <view class="user-rating">
+                <image class="user-avatar" lazy-load src="{{item.avatar}}" />
+                <view class="user-desc">
+                    <view class="username">{{item.username}}</view>
+                    <view class="user-score">score:{{item.score}}</view>
+                    <view class="user-text">{{item.text}}</view>
+                    <scroll-view scroll-x class="recommend-wrapper">
+                        <text class="recommend" wx:for="{{item.recommend}}" wx:key="index">
+                            <text>{{item}}</text>
+                        </text>
+                    </scroll-view>
+                </view>
+                <view class="rateTime">{{item.rateTime}}</view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

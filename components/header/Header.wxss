@@ -1,0 +1,92 @@
+/* 头部样式 */
+.container-header {
+  position: relative;
+}
+.bg-img {
+  position: relative;
+  width: 100%;
+  height: 220rpx;
+  filter: blur(4rpx);
+}
+.bg-img .img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.top-img {
+  position: absolute;
+  top: 100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 8rpx;
+}
+.title {
+  padding: 30rpx 100rpx;
+}
+.seller-name {
+  display: block;
+  padding: 10rpx 0;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: rgba(7, 17, 27, 0.8);
+}
+.seller-desc {
+  display: block;
+  text-align: center;
+  font-size: 22rpx;
+  color: rgba(7, 17, 27, 0.6);
+}
+.desc {
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.desc:last-child {
+  margin: 0;
+}
+
+.supports-wrapper {
+  display: flex;
+  width: 100%;
+  height: 40rpx;
+  padding: 22rpx 72rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.supports-swiper {
+  flex: 1;
+  font-size: 26rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #d84315;
+}
+.supports-item {
+  display: flex;
+  width: 100%;
+  height: 40rpx;
+  align-items: center;
+}
+.supports-desc {
+  height: 100%;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.supports-num {
+  font-size: 22rpx;
+  color: rgba(7, 17, 27, 0.6);
+}
+.bulletin {
+  padding: 10rpx 72rpx;
+  font-size: 22rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(7, 17, 27, 0.6);
+}

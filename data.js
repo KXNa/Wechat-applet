@@ -1,6 +1,6 @@
 
   let  seller = {
-    "name": "粥品香坊（大运村）",
+    "name": "恰饭吧（小食店）",
     "description": "蜂鸟专送",
     "deliveryTime": 38,
     "score": 4.2,
