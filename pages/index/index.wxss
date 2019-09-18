@@ -16,7 +16,6 @@
   left: 0;
   right: 0;
   width: 100%;
-  /* height: 220rpx; */
 }
 .top-img {
   position: absolute;
@@ -191,7 +190,6 @@
 }
 .price {
   font-size: 26rpx;
-  /* font-weight: 700; */
   color: #d84315;
   margin-right: 10rpx;
 }
@@ -229,7 +227,7 @@
 }
 .good-list-title text {
   display: inline-block;
-  color: rgb(96, 96, 96);
+  color: rgb(7, 17, 27);
 }
 .good-list-title .text {
   flex: 1;
@@ -260,7 +258,7 @@
 }
 .good-price {
   flex: 2;
-  margin-right: 120rpx;
+  margin-right: 160rpx;
   font-weight: 700;
   color: #d84315;
 }
@@ -286,6 +284,12 @@
   vertical-align: middle;
   background: rgb(52, 52, 52);
 }
+.icon-wrapper.active {
+  background: #ff6e40;
+}
+.icon-wrapper.active .icon-shopping_cart{
+  color: #f1f1f1;
+}
 .icon-shopping_cart {
   position: absolute;
   top: 50%;
@@ -303,6 +307,11 @@
 .total-price {
   font-size: 26rpx;
 }
+.total-price.active{
+  margin-top: -4rpx;
+  font-size: 32rpx;
+  color: #fff;
+}
 .deliveryPrice {
   font-size: 20rpx;
 }
@@ -313,5 +322,13 @@
   line-height: 96rpx;
   font-size: 32rpx;
   background: rgb(84, 80, 88);
+  color: #fff;
+}
+.minPrice.lack {
+  font-size: 28rpx;
+}
+.minPrice.enough {
+  font-size: 36rpx;
+  background: #ff6e40;
   color: #fff;
 }

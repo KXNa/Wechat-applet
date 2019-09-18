@@ -19,13 +19,19 @@ Component({
    },
    observers: {
       'chooseFood,name': function(chooseFood,name) {
-         chooseFood.forEach(food=>{
-            if(name === food.name){
-               this.setData({
-                  count: food.count
-               })
-            }
-         })
+         if(chooseFood.length===0){
+            this.setData({
+               count: 0
+            })
+         }else {
+            chooseFood.forEach(food=>{
+               if(name === food.name){
+                  this.setData({
+                     count: food.count
+                  })
+               }
+            })
+         }
       }
     },
    /**
@@ -34,11 +40,11 @@ Component({
    methods: {
       addCount: function(){
          this.triggerEvent('add',this.properties.food)
-         this.upDatedCount()
+         // this.upDatedCount()
       },
       reduceCount: function(){
          this.triggerEvent('reduce',this.properties.food)
-         this.upDatedCount()
+         // this.upDatedCount()
          
       },
       upDatedCount: function(){

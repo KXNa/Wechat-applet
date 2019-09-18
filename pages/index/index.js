@@ -20,7 +20,7 @@ Page({
     //图标名字
     supportsClassMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
     //导航栏自定义下标值
-    currentIndex: 1,
+    currentIndex: 2,
     //商品分类栏下标值
     typeIndex: 0,
     toView: 0,
@@ -33,7 +33,9 @@ Page({
     //被选中的商品数组
     chooseFood: [],
     //是否隐藏购物车详情列表
-    isGoodListHidden: false
+    isGoodListHidden: true,
+    //商品总价格
+    allPrice: 0
   },
   newData: function () {
     this.setData({
@@ -115,6 +117,7 @@ Page({
       for (var food of chooseFood) {
         if (food.name == e.detail.name) {
           food.count = food.count + 1
+          food.price = food.price + (food.price / (food.count - 1))
           bool = false
         }
       }
@@ -132,9 +135,7 @@ Page({
         count: 1
       })
     }
-    this.setData({
-      chooseFood
-    })
+    this.totalPrice(chooseFood)
     // console.log("add",this.data.chooseFood)
   },
   //点击减少按钮，更新数组
@@ -143,23 +144,55 @@ Page({
     chooseFood.forEach(food => {
       if (food.name === e.detail.name) {
         food.count = food.count - 1
+        food.price = food.price - (food.price / (food.count + 1))
       }
     });
     this.setData({
       chooseFood
     })
-    this.filterChooseFood()
-    // console.log("reduce", this.data.chooseFood)
+    let newChooseFood = this.data.chooseFood
+    this.filterChooseFood(newChooseFood)
   },
   //过滤所选商品数组
-  filterChooseFood: function () {
-    let chooseFood = this.data.chooseFood
+  filterChooseFood: function (e) {
+    let chooseFood = e
     chooseFood = chooseFood.filter(food => {
       return food.count != 0
     })
+    this.totalPrice(chooseFood)
+
+  },
+  //选购商品总价
+  totalPrice: function (e) {
+    let chooseFood = e
+    let allPrice = 0
+    if (chooseFood.length > 0) {
+      for (var i = 0; i < chooseFood.length; i++) {
+        allPrice = allPrice + chooseFood[i].price
+      }
+    }
     this.setData({
+      allPrice,
       chooseFood
     })
+  },
+  //清除所选商品
+  clearChooseFood: function () {
+    this.setData({
+      chooseFood: [],
+      isGoodListHidden: true
+    })
+    let chooseFood = this.data.chooseFood
+    this.filterChooseFood(chooseFood)
+  },
+  //展示所选商品列表
+  showGoodList: function () {
+    if (this.data.chooseFood.length > 0) {
+      this.setData({
+        isGoodListHidden: !this.data.isGoodListHidden
+      })
+    }
+    return
   },
   /**
    * 生命周期函数--监听页面加载

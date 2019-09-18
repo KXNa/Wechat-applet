@@ -1,115 +1,134 @@
 <!-- index.wxml -->
 <!-- 头部 -->
-<view class="container-header">
-    <view class="bg-img">
-        <image class="img" mode="{{aspectFit}}" src="{{seller.avatar}}" />
-    </view>
-    <image class="top-img" src="{{seller.avatar}}" />
-    <view class="title">
-        <text class="seller-name">{{seller.name}}></text>
-        <view class="seller-desc">
-            <text class="desc">评价{{seller.score}}</text>
-            <text class="desc">月售{{seller.sellCount}}单</text>
-            <text class="desc">{{seller.description}}约{{seller.deliveryTime}}分钟</text>
+<header>
+    <view class="container-header">
+        <view class="bg-img">
+            <image class="img" mode="scaleToFill" src="{{seller.avatar}}" />
         </view>
-    </view>
-    <view class="supports-wrapper">
-        <swiper class="supports-swiper" circular vertical autoplay>
-            <swiper-item style="height: 40rpx;" class="supports-item" wx:for="{{seller.supports}}" wx:key="unique">
-                <image style="width:28rpx;height:28rpx" mode="{{aspectFit}}" src="../../image/{{supportsClassMap[item.type]}}_4@2x.png" alt="img" />
-                <text class="supports-desc">{{item.description}}</text>
-            </swiper-item>
-        </swiper>
-        <view class="supports-num" wx:if="{{seller.supports.length}}">
-            {{seller.supports.length}}个优惠
+        <image class="top-img" mode="aspectFit" src="{{seller.avatar}}" />
+        <view class="title">
+            <text class="seller-name">{{seller.name}}></text>
+            <view class="seller-desc">
+                <text class="desc">评价{{seller.score}}</text>
+                <text class="desc">月售{{seller.sellCount}}单</text>
+                <text class="desc">{{seller.description}}约{{seller.deliveryTime}}分钟</text>
+            </view>
         </view>
+        <view class="supports-wrapper">
+            <swiper class="supports-swiper" circular vertical autoplay>
+                <swiper-item style="height: 40rpx;" class="supports-item" wx:for="{{seller.supports}}" wx:key="unique">
+                    <image style="width:28rpx;height:28rpx" mode="{{aspectFit}}" src="../../image/{{supportsClassMap[item.type]}}_4@2x.png" alt="img" />
+                    <text class="supports-desc">{{item.description}}</text>
+                </swiper-item>
+            </swiper>
+            <view class="supports-num" wx:if="{{seller.supports.length}}">
+                {{seller.supports.length}}个优惠
+            </view>
+        </view>
+        <view class="bulletin">公告：{{seller.bulletin}}</view>
     </view>
-    <view class="bulletin">公告：{{seller.bulletin}}</view>
-</view>
+</header>
 <!-- 导航栏 -->
-<view class="tab">
-    <view class="tab-item {{currentIndex===1 ? 'active' : '' }}" data-index="{{1}}" bindtap="navActive">
-        点餐
+<nav>
+    <view class="tab">
+        <view class="tab-item {{currentIndex===1 ? 'active' : '' }}" data-index="{{1}}" bindtap="navActive">
+            点餐
+        </view>
+        <view class="tab-item {{currentIndex===2 ? 'active' : '' }}" data-index="{{2}}" bindtap="navActive">
+            评价
+        </view>
+        <view class="tab-item {{currentIndex===3 ? 'active' : '' }}" data-index="{{3}}" bindtap="navActive">
+            商家
+        </view>
     </view>
-    <view class="tab-item {{currentIndex===2 ? 'active' : '' }}" data-index="{{2}}" bindtap="navActive">
-        评价
-    </view>
-    <view class="tab-item {{currentIndex===3 ? 'active' : '' }}" data-index="{{3}}" bindtap="navActive">
-        商家
-    </view>
-</view>
+</nav>
 <!-- 点餐 -->
-<view class="container-goods" hidden="{{currentIndex!==1}}">
-    <!-- 左侧商品类型 -->
-    <view class="goods-type-wrapper">
-        <scroll-view class="type" scroll-y>
-            <view bindtap="typeIndexChange" data-id="b{{index}}" data-index="{{index}}" wx:for="{{goods}}" wx:key="index" class="type-item {{typeIndex===index ? 'active' : ''}}">
-                <image wx:if="{{item.type > 0}}" mode="{{aspectFit}}" style="width:28rpx;height:28rpx" src="../../image/{{supportsClassMap[item.type]}}_3@2x.png" alt="img" />
-                {{item.name}}
-            </view>
-        </scroll-view>
-    </view>
-    <!-- 右侧商品详情 -->
-    <view class="foods-wrapper">
-        <scroll-view class="foods" scroll-y scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
-            <view wx:for="{{goods}}" wx:key="index" wx:for-item="i" data-i="i">
-                <view class="foods-list" id="b{{index}}">
-                    <view class="goods-type-name">{{i.name}}</view>
-                    <!-- food标签 -->
-                    <view class="food-container" wx:for="{{i.foods}}" wx:key="index" bind:tap="showDetail" data-id="{{index}}" data-i="{{i}}" data-food="{{item}}">
-                        <image class="food-img" src="{{item.icon}}" alt="img" />
-                        <view class="food-item">
-                            <view class="food-name">{{item.name}}</view>
-                            <view class="food-info" wx:if="{{item.info}}">{{item.info}}</view>
-                            <view class="food-desc">
-                                <text>月售{{item.sellCount}}份</text>
-                                <text>好评率{{item.rating}}%</text>
-                            </view>
-                            <view class="food-price">
-                                <text class="price">￥{{item.price}}</text>
-                                <text wx:if="{{item.oldPrice}}" class="old-price">
-                                    ￥{{item.oldPrice}}
-                                </text>
-                            </view>
-                        </view>
-                        <ButtonBall bind:add="add" bind:reduce="reduce" food="{{item}}" name="{{item.name}}" chooseFood="{{chooseFood}}" />
-                    </view>
-                </view>
-            </view>
-        </scroll-view>
-        <!-- 商品详情组件 -->
-        <FoodDetail wx:if="{{isDetailShow}}" food="{{food}}" bind:close="closeDetail" />
-    </view>
-    <!-- 购物车 -->
-    <view class="container-shop-cart">
-        <!-- 购物车商品列表栏 -->
-        <view class="shop-cart-good-list" hidden="{{chooseFood.length===0 || isGoodListHidden}}">
-            <view class="good-list-title">
-                <text class="text">已选商品</text>
-                <text class="cleanbtn">清空</text>
-            </view>
-            <scroll-view class="good-list-wrapper" scroll-y >
-                <view class="good-list" wx:for="{{chooseFood}}" wx:key="index">
-                    <view class="good-name">{{item.name}}</view>
-                    <view class="good-price">{{item.price}}</view>
-                    <ButtonBall class="shop-cart-btn" bind:add="add" bind:reduce="reduce" count="{{item.count}}" name="{{item.name}}" food="{{item}}" chooseFood="{{chooseFood}}" />
+<section>
+    <view class="container-goods" hidden="{{currentIndex!==1}}">
+        <!-- 左侧商品类型 -->
+        <view class="goods-type-wrapper">
+            <scroll-view class="type" scroll-y>
+                <view bindtap="typeIndexChange" data-id="b{{index}}" data-index="{{index}}" wx:for="{{goods}}" wx:key="index" class="type-item {{typeIndex===index ? 'active' : ''}}">
+                    <image wx:if="{{item.type > 0}}" mode="{{aspectFit}}" style="width:28rpx;height:28rpx" src="../../image/{{supportsClassMap[item.type]}}_3@2x.png" alt="img" />
+                    {{item.name}}
                 </view>
             </scroll-view>
         </view>
-        <!-- 购物车图标 -->
-        <view class="icon-box">
-            <view class="icon-wrapper">
-                <view class="icon-shopping_cart"></view>
+        <!-- 右侧商品详情 -->
+        <view class="foods-wrapper">
+            <scroll-view class="foods" scroll-y scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
+                <view wx:for="{{goods}}" wx:key="index" wx:for-item="i" data-i="i">
+                    <view class="foods-list" id="b{{index}}">
+                        <view class="goods-type-name">{{i.name}}</view>
+                        <!-- food标签 -->
+                        <view class="food-container" wx:for="{{i.foods}}" wx:key="index" bind:tap="showDetail" data-id="{{index}}" data-i="{{i}}" data-food="{{item}}">
+                            <image class="food-img" src="{{item.icon}}" alt="img" lazy-load mode="aspectFit" />
+                            <view class="food-item">
+                                <view class="food-name">{{item.name}}</view>
+                                <view class="food-info" wx:if="{{item.info}}">{{item.info}}</view>
+                                <view class="food-desc">
+                                    <text>月售{{item.sellCount}}份</text>
+                                    <text>好评率{{item.rating}}%</text>
+                                </view>
+                                <view class="food-price">
+                                    <text class="price">￥{{item.price}}</text>
+                                    <text wx:if="{{item.oldPrice}}" class="old-price">
+                                        ￥{{item.oldPrice}}
+                                    </text>
+                                </view>
+                            </view>
+                            <ButtonBall bind:add="add" bind:reduce="reduce" food="{{item}}" name="{{item.name}}" chooseFood="{{chooseFood}}" />
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <!-- 商品详情组件 -->
+            <FoodDetail wx:if="{{isDetailShow}}" food="{{food}}" bind:close="closeDetail" />
+        </view>
+        <!-- 购物车 -->
+        <view class="container-shop-cart" bind:tap="showGoodList">
+            <!-- 购物车商品列表栏 -->
+            <view class="shop-cart-good-list" hidden="{{chooseFood.length===0 || isGoodListHidden}}">
+                <view class="good-list-title">
+                    <text class="text">已选商品</text>
+                    <text class="cleanbtn" bind:tap="clearChooseFood">清空</text>
+                </view>
+                <scroll-view class="good-list-wrapper" scroll-y>
+                    <view class="good-list" wx:for="{{chooseFood}}" wx:key="index">
+                        <view class="good-name">{{item.name}}</view>
+                        <view class="good-price">¥{{item.price}}</view>
+                        <ButtonBall class="shop-cart-btn" bind:add="add" bind:reduce="reduce" count="{{item.count}}" name="{{item.name}}" food="{{item}}" chooseFood="{{chooseFood}}" />
+                    </view>
+                </scroll-view>
+            </view>
+            <!-- 购物车图标 -->
+            <view class="icon-box">
+                <view class="icon-wrapper {{chooseFood.length>0 ? 'active' : ''}}">
+                    <view class="icon-shopping_cart"></view>
+                </view>
+            </view>
+            <view class="total">
+                <view class="total-price" wx:if="{{allPrice===0}}">未选购商品</view>
+                <view class="total-price {{allPrice>0 ? 'active': ''}}" wx:if="{{allPrice>0}}">
+                    ¥{{allPrice}}
+                </view>
+                <view class="deliveryPrice">另需配送费¥{{seller.deliveryPrice}}元</view>
+            </view>
+            <view class="minPrice" wx:if="{{allPrice===0}}">¥{{seller.minPrice}}起送</view>
+            <view class="minPrice {{allPrice>0 &&seller.minPrice>allPrice ? 'lack':''}}" wx:if="{{allPrice>0 &&seller.minPrice>allPrice}}">
+                还差¥{{seller.minPrice-allPrice}}起送
+            </view>
+            <view class="minPrice {{seller.minPrice<=allPrice?'enough':''}}" wx:if="{{seller.minPrice<=allPrice}}">
+                去结算
             </view>
         </view>
-        <view class="total">
-            <view class="total-price">未选购商品</view>
-            <view class="deliveryPrice">另需配送费{{seller.deliveryPrice}}元</view>
-        </view>
-        <view class="minPrice">￥{{seller.minPrice}}起送</view>
     </view>
-</view>
+</section>
 <!-- 评价 -->
-<view class="container-ratings" wx:if="{{currentIndex===2}}">评价页面</view>
+<section>
+    <view class="container-ratings" wx:if="{{currentIndex===2}}">评价页面</view>
+</section>
 <!-- 商家 -->
-<view class="container-seller" wx:if="{{currentIndex===3}}">商家页面</view>
+<section>
+    <view class="container-seller" wx:if="{{currentIndex===3}}">商家页面</view>
+</section>

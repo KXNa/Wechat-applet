@@ -4,20 +4,23 @@
     right: 20rpx;
     display: flex;
     height: 40rpx;
-    line-height: 36rpx;
+    line-height: 40rpx;
 }
 .reduce, .add {
-    flex: 0 0 36rpx;
-    width: 36rpx;
-    height: 36rpx;
+    flex: 0 0 40rpx;
+    width: 40rpx;
+    height: 40rpx;
     border-radius: 50%;
     text-align: center;
-    line-height: 34rpx;
-    font-size: 36rpx;
+    line-height: 36rpx;
     border: 1rpx solid #ff6e40;
     color: #ff6e40;
 }
+.reduce {
+    font-size: 48rpx;
+}
 .add {
+    font-size: 36rpx;
     color: #fff;
     background: #ff6e40;
 }
