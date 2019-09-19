@@ -20,6 +20,7 @@
 .star-score > text {
   display: block;
   font-size: 24rpx;
+  padding-bottom: 6rpx;
 }
 .score {
   font-size: 64rpx;

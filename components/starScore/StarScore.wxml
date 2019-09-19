@@ -1,0 +1,4 @@
+<!-- components/starScore/StarScore.wxml -->
+<view class="star-content" wx:for="{{starItems}}" wx:key="index" wx:for-item="star" class="{{star}}">
+    <image class="star-img" mode="{{aspectFit}}" src="../../image/star24_{{star}}@2x.png" />
+</view>

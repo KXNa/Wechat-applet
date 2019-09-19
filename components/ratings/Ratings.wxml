@@ -1,11 +1,12 @@
 <!-- components/ratings/Ratings.wxml -->
+<wxs module="DateFr" src="../../filter/dateFilter.wxs"></wxs>
 <view class="container-ratings">
     <!-- 总评栏 -->
     <view class="seller-ratings">
         <view class="score">{{seller.score}}</view>
         <view class="star-score">
             <text class="star-text">商家评分</text>
-            <text>...</text>
+            <StarScore score="{{seller.score}}" />
         </view>
         <view class="score-content">
             <text class="score-type">味道</text>
@@ -40,15 +41,18 @@
             </view>
         </view>
         <!-- 筛选只看有内容 -->
-        <view class="valueable-ratings" wx:if="{{!onlyContent}}" bind:tap="ratingsContentFilter">⚪ 只看有内容的评价</view>
-        <view class="valueable-ratings" wx:if="{{onlyContent}}" bind:tap="ratingsContentFilter">🟠 只看有内容的评价</view>
+        <view class="valueable-ratings" bind:tap="ratingsContentFilter">
+            <text wx:if="{{!onlyContent}}">⚪</text>
+            <text wx:if="{{onlyContent}}">⭕</text>
+             只看有内容的评价
+        </view>
         <!-- 评论内容 -->
         <scroll-view scroll-y enable-flex class="user-ratings-wrapper" wx:for="{{_ratings}}" wx:key="index">
             <view class="user-rating">
                 <image class="user-avatar" lazy-load src="{{item.avatar}}" />
                 <view class="user-desc">
                     <view class="username">{{item.username}}</view>
-                    <view class="user-score">score:{{item.score}}</view>
+                    <view class="user-score"><StarScore score="{{item.score}}"/></view>
                     <view class="user-text">{{item.text}}</view>
                     <view class="recommend-wrapper">
                         <text class="recommend" wx:for="{{item.recommend}}" wx:key="index">
@@ -56,7 +60,7 @@
                         </text>
                     </view>
                 </view>
-                <view class="rateTime">{{item.rateTime}}</view>
+                <view class="rateTime">{{DateFr.getDate(item.rateTime)}}</view>
             </view>
         </scroll-view>
     </view>

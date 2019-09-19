@@ -1,0 +1,19 @@
+/* components/starScore/StarScore.wxss */
+.star-content {
+  vertical-align: text-top;
+}
+.on,
+.half,
+.off {
+  position: relative;
+  display: inline-block;
+  width: 24rpx;
+  height: 24rpx;
+}
+.star-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24rpx;
+  height: 24rpx;
+}

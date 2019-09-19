@@ -1,2 +1,3 @@
 <!--components/sellerPage/SellerPage.wxml-->
-<text>暂时不想写，反正很好看就是了</text>
+<text class="nanaSay">┗|｀O′|┛ 嗷~~老板偷懒，啥都没留下呢😛</text>
+<view class="star"><StarScore score="{{score}}" /></view>
