@@ -20,7 +20,7 @@ Page({
      //图标名字
      supportsClassMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
     //导航栏自定义下标值
-    currentIndex: 2,
+    currentIndex: 1,
     //商品分类栏下标值
     typeIndex: 0,
     toView: 0,

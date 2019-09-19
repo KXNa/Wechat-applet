@@ -34,12 +34,12 @@
         <!-- 右侧商品详情 -->
         <aside class="right-aside">
             <view class="foods-wrapper">
-                <scroll-view class="foods" scroll-y scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
+                <scroll-view class="foods" scroll-y enable-flex scroll-into-view="{{toView}}" bindscroll="scroll" scroll-with-animation="{{true}}">
                     <view wx:for="{{goods}}" wx:key="index" wx:for-item="i" data-i="i">
                         <view class="foods-list" id="b{{index}}">
                             <view class="goods-type-name">{{i.name}}</view>
                             <!-- food标签 -->
-                            <view class="food-container" wx:for="{{i.foods}}" wx:key="index" bind:tap="showDetail" data-id="{{index}}" data-i="{{i}}" data-food="{{item}}">
+                            <view class="food-container" wx:for="{{i.foods}}" wx:key="index" bind:tap="showDetail" data-id="b{{index}}" data-i="{{i}}" data-food="{{item}}">
                                 <image class="food-img" src="{{item.icon}}" alt="img" lazy-load mode="aspectFit" />
                                 <view class="food-item">
                                     <view class="food-name">{{item.name}}</view>

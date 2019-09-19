@@ -26,25 +26,35 @@
     <view class="container-ratings-wrapper">
         <!-- 评论分类按钮 -->
         <view class="select-btn-wrapper">
-            <view class="select-btn {{selectType==2?'active':''}}" data-index="2" bind:tap="filterRatings">全部 <text class="count">{{ratings.length}}</text></view>
-            <view class="select-btn {{selectType==0?'active':''}}" data-index="0" bind:tap="filterRatings">好评 <text class="count">{{ratings.length}}</text></view>
-            <view class="btn-dislike {{selectType==1?'active':''}}" data-index="1" bind:tap="filterRatings">差评 <text class="count">{{ratings.length}}</text></view>
+            <view class="select-btn {{selectType==2?'active':''}}" data-id="2" bind:tap="filterRatings">
+                全部
+                <text class="count">{{ratings.length}}</text>
+            </view>
+            <view class="select-btn {{selectType==0?'active':''}}" data-id="0" catch:tap="filterRatings">
+                好评
+                <text class="count">{{likeNum}}</text>
+            </view>
+            <view class="btn-dislike {{selectType==1?'active':''}}" data-id="1" catch:tap="filterRatings">
+                差评
+                <text class="count">{{dislikeNum}}</text>
+            </view>
         </view>
         <!-- 筛选只看有内容 -->
-        <view class="valueable-ratings">✔ 只看有内容的评价</view>
+        <view class="valueable-ratings" wx:if="{{!onlyContent}}" bind:tap="ratingsContentFilter">⚪ 只看有内容的评价</view>
+        <view class="valueable-ratings" wx:if="{{onlyContent}}" bind:tap="ratingsContentFilter">🟠 只看有内容的评价</view>
         <!-- 评论内容 -->
-        <scroll-view scroll-y class="user-ratings-wrapper" wx:for="{{ratings}}" wx:key="index">
+        <scroll-view scroll-y enable-flex class="user-ratings-wrapper" wx:for="{{_ratings}}" wx:key="index">
             <view class="user-rating">
                 <image class="user-avatar" lazy-load src="{{item.avatar}}" />
                 <view class="user-desc">
                     <view class="username">{{item.username}}</view>
                     <view class="user-score">score:{{item.score}}</view>
                     <view class="user-text">{{item.text}}</view>
-                    <scroll-view scroll-x class="recommend-wrapper">
+                    <view class="recommend-wrapper">
                         <text class="recommend" wx:for="{{item.recommend}}" wx:key="index">
                             <text>{{item}}</text>
                         </text>
-                    </scroll-view>
+                    </view>
                 </view>
                 <view class="rateTime">{{item.rateTime}}</view>
             </view>
